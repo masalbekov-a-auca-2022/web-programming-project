@@ -1,0 +1,455 @@
+:root {
+    --primary-color: #2C3E50;
+    --secondary-color: #3498DB;
+    --accent-color: #1ABC9C;
+    --background-color: #F5F7FA;
+    --card-background: #FFFFFF;
+    --text-color: #2C3E50;
+    --text-light: #7F8C8D;
+    --border-color: #E5E7EB;
+    --positive: #2ECC71;
+    --negative: #E74C3C;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --card-radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+.dark-theme {
+    --primary-color: #1A1E24;
+    --secondary-color: #255D95;
+    --accent-color: #17A589;
+    --background-color: #121418;
+    --card-background: #1F2937;
+    --text-color: #E5E7EB;
+    --text-light: #9CA3AF;
+    --border-color: #374151;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: var(--transition);
+    line-height: 1.6;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+header h1 i {
+    color: var(--accent-color);
+    margin-right: 10px;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--text-light);
+    transition: var(--transition);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: var(--transition);
+}
+
+input:checked + .slider {
+    background-color: var(--accent-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.search-section {
+    margin-bottom: 30px;
+}
+
+#add-ticker-form {
+    display: flex;
+    gap: 15px;
+}
+
+.input-group {
+    position: relative;
+    flex-grow: 1;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+}
+
+#new-ticker {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--text-color);
+    background-color: var(--card-background);
+    transition: var(--transition);
+}
+
+#new-ticker:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.2);
+}
+
+.btn-primary {
+    padding: 12px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #16a085;
+}
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--card-background);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+}
+
+.market-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#market-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--text-light);
+}
+
+#market-indicator.open {
+    background-color: var(--positive);
+}
+
+#market-indicator.closed {
+    background-color: var(--negative);
+}
+
+.refresh-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-light);
+}
+
+.refresh-info i {
+    animation: spin 2s linear infinite paused;
+}
+
+.refresh-info.refreshing i {
+    animation-play-state: running;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+main {
+    min-height: 400px;
+}
+
+#stocks-message {
+    text-align: center;
+    padding: 40px;
+    background-color: var(--card-background);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#stocks-message i {
+    font-size: 48px;
+    color: var(--text-light);
+}
+
+.stocks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.stock-card {
+    background-color: var(--card-background);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.stock-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.stock-header .ticker {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.company-name {
+    position: absolute;
+    left: 0;
+    top: 30px;
+    font-size: 14px;
+    color: var(--text-light);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80%;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.remove-btn:hover {
+    color: var(--negative);
+}
+
+.stock-price {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+    margin: 25px 0 20px;
+}
+
+.current-price {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.price-change {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.price-change.positive {
+    color: var(--positive);
+}
+
+.price-change.negative {
+    color: var(--negative);
+}
+
+.stock-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 3px;
+}
+
+.value {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.stock-footer {
+    text-align: right;
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.hidden {
+    display: none;
+}
+
+footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-light);
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        padding: 15px;
+    }
+    
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .theme-toggle {
+        align-self: flex-end;
+    }
+    
+    #add-ticker-form {
+        flex-direction: column;
+    }
+    
+    .status-bar {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .stocks-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.stock-card.clickable {
+    cursor: pointer;
+    position: relative;
+}
+
+.stock-card.clickable:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stock-card.clickable::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid var(--text-light);
+    border-right: 2px solid var(--text-light);
+    transform: rotate(45deg);
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.stock-card.clickable:hover::after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1.2);
+}
+
+.error-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+
+.error-message i {
+    font-size: 48px;
+    color: var(--negative);
+}
