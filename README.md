@@ -2,6 +2,7 @@
 
 This project is a web application built using Flask that allows users to view stock information and historical data using the yfinance library.
 
+Setup
 ```bash
 git clone https://github.com/masalbekov-a-auca-2022/web-programming-project.git
 cd web-programming-project
